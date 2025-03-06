@@ -12,7 +12,7 @@ const ProductBox = (props) => {
           />
           <h3 className="text-xl font-semibold mb-2">{props.name}</h3>
           <p className="text-gray-600 mb-4">{props.description}</p>
-          <span className="font-bold text-indigo-600">{props.price}</span>
+          <span className="font-bold text-indigo-600">{"£" + props.price}</span>
         </div>
       </Link>
     </>

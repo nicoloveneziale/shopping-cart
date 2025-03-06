@@ -1,7 +1,31 @@
 import { Link } from "react-router-dom";
 import ProductBox from "../components/productBox";
+import { useEffect, useState } from "react";
 
 const HomePage = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function getProducts() {
+      try {
+        const data = await fetch(
+          "https://fakestoreapi.com/products/category/electronics",
+        ).then((res) => res.json());
+        setProducts(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setLoading(false);
+      }
+    }
+    getProducts();
+  }, []);
+
+  if (loading) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <section className="bg-gradient-to-r from-indigo-600 to-purple-600 py-20 text-center text-white">
@@ -25,29 +49,32 @@ const HomePage = () => {
             Featured Products
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ProductBox
-              name="product"
-              description="description"
-              price="price"
-            />
+            {products.length > 0 && (
+              <>
+                <ProductBox
+                  name={products[0].title}
+                  description={products[0].description}
+                  price={products[0].price}
+                  img={products[0].image}
+                  productId={products[0].id}
+                />
 
-            <ProductBox
-              name="product"
-              description="description"
-              price="price"
-            />
-
-            <ProductBox
-              name="product"
-              description="description"
-              price="price"
-            />
-
-            <ProductBox
-              name="product"
-              description="description"
-              price="price"
-            />
+                <ProductBox
+                  name={products[1].title}
+                  description={products[1].description}
+                  price={products[1].price}
+                  img={products[1].image}
+                  productId={products[1].id}
+                />
+                <ProductBox
+                  name={products[2].title}
+                  description={products[2].description}
+                  price={products[2].price}
+                  img={products[2].image}
+                  productId={products[2].id}
+                />
+              </>
+            )}
           </div>
         </div>
       </section>
