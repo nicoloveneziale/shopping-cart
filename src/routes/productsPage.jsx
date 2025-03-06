@@ -1,14 +1,16 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import ProductBox from "../components/productBox";
 
 const ProductsPage = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    async function getProducts() {
+    async function getProduct() {
       try {
         const data = await fetch(
           `https://fakestoreapi.com/products/${productId}`,
@@ -21,11 +23,28 @@ const ProductsPage = () => {
       }
     }
     if (productId) {
-      getProducts();
+      getProduct();
     } else {
       setLoading(false);
     }
   }, [productId]);
+
+  useEffect(() => {
+    async function getProducts() {
+      setLoading(true);
+      try {
+        const data = await fetch(
+          "https://fakestoreapi.com/products/category/electronics",
+        ).then((res) => res.json());
+        setProducts(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setLoading(false);
+      }
+    }
+    getProducts();
+  }, []);
 
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;
@@ -43,17 +62,13 @@ const ProductsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      {" "}
-      {/* Center content vertically and horizontally */}
+    <div className="min-h-9/12 bg-gray-100">
       <div className="container mx-auto w-full max-w-4xl p-4 md:p-6">
-        {" "}
-        {/* Use max-w-4xl to limit width */}
         {product ? (
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+            {" "}
+            {/* Added mb-8 for spacing */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-              {" "}
-              {/* Use items-start to align content to the top */}
               <div className="flex justify-center items-center">
                 <img
                   src={product.image}
@@ -62,8 +77,6 @@ const ProductsPage = () => {
                 />
               </div>
               <div className="flex flex-col justify-start">
-                {" "}
-                {/* Use flex-col and justify-start to take up vertical space */}
                 <h2 className="text-3xl font-semibold mb-4">{product.title}</h2>
                 <p className="text-gray-700 mb-6 text-base">
                   {product.description}
@@ -103,6 +116,23 @@ const ProductsPage = () => {
             </p>
           </div>
         )}
+        <div>
+          <h1 className="text-2xl font-semibold mb-4">More Products</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product) => {
+              return (
+                <ProductBox
+                  key={product.id}
+                  name={product.title}
+                  description={product.description}
+                  price={product.price}
+                  img={product.image}
+                  productId={product.id}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
