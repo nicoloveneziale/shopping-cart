@@ -1,4 +1,6 @@
-import React from "react";
+import harley from "../assets/harley.jpeg";
+import toast from "../assets/toast.jpg";
+import me from "../assets/me.jpeg";
 
 const About = () => {
   return (
@@ -46,29 +48,29 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow-md p-4">
               <img
-                src="https://via.placeholder.com/150"
+                src={me}
                 alt="Founder 1"
                 className="w-full rounded-md mb-4"
               />
-              <h3 className="text-xl font-semibold mb-2">John Doe</h3>
+              <h3 className="text-xl font-semibold mb-2">Nicolo Veneziale</h3>
               <p className="text-gray-600">Founder & CEO</p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-4">
               <img
-                src="https://via.placeholder.com/150"
+                src={toast}
                 alt="Founder 2"
                 className="w-full rounded-md mb-4"
               />
-              <h3 className="text-xl font-semibold mb-2">Jane Smith</h3>
+              <h3 className="text-xl font-semibold mb-2">Toasty Woasty</h3>
               <p className="text-gray-600">Head of Operations</p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-4">
               <img
-                src="https://via.placeholder.com/150"
+                src={harley}
                 alt="Founder 3"
                 className="w-full rounded-md mb-4"
               />
-              <h3 className="text-xl font-semibold mb-2">David Lee</h3>
+              <h3 className="text-xl font-semibold mb-2">Harley Barley</h3>
               <p className="text-gray-600">Lead Developer</p>
             </div>
           </div>
