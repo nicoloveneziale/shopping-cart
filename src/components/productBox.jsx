@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 
 const ProductBox = (props) => {
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
-      <Link to={"/products/" + props.productId}>
+      <Link to={"/products/" + props.productId} onClick={handleClick}>
         <div className="bg-white rounded-lg shadow-md p-6">
           <img
             src={props.img}

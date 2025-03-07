@@ -66,8 +66,6 @@ const ProductsPage = () => {
       <div className="container mx-auto w-full max-w-4xl p-4 md:p-6">
         {product ? (
           <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            {" "}
-            {/* Added mb-8 for spacing */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
               <div className="flex justify-center items-center">
                 <img
