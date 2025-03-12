@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useCart } from "../context/CartContext";
 import ProductBox from "../components/productBox";
 
 const ProductsPage = () => {
@@ -8,6 +9,11 @@ const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+  const { cart, setCart } = useCart();
+
+  function handleClick() {
+    setCart({ ...cart, [productId]: { id: productId, quantity: quantity } });
+  }
 
   useEffect(() => {
     async function getProduct() {
@@ -100,7 +106,10 @@ const ProductsPage = () => {
                     min="1"
                   />
                 </div>
-                <button className="bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-700 transition-colors text-base">
+                <button
+                  onClick={() => handleClick()}
+                  className="bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-700 transition-colors text-base"
+                >
                   Add to Cart
                 </button>
               </div>
@@ -126,6 +135,7 @@ const ProductsPage = () => {
                   price={product.price}
                   img={product.image}
                   productId={product.id}
+                  setQuantity={() => setQuantity(1)}
                 />
               );
             })}

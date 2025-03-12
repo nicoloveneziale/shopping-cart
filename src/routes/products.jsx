@@ -43,13 +43,6 @@ const Products = () => {
     outlet
   ) : (
     <main className="flex min-h-screen bg-gray-100">
-      <button
-        onClick={() => setSideHidden(!sideHidden)}
-        className="md:hidden p-2 bg-gray-200 rounded absolute top-4 left-4"
-      >
-        {sideHidden ? "Show Filters" : "Hide Filters"}
-      </button>
-
       <aside
         className={`w-64 p-4 bg-gray-200 fixed top-0 left-0 h-full transform transition-transform duration-300 ease-in-out ${
           sideHidden ? "-translate-x-full" : "translate-x-0"
@@ -74,6 +67,12 @@ const Products = () => {
       </aside>
 
       <div className="flex-grow p-6 w-full">
+        <button
+          onClick={() => setSideHidden(!sideHidden)}
+          className="md:hidden p-2 bg-gray-200 rounded  top-4 left-4"
+        >
+          {sideHidden ? "Show Filters" : "Hide Filters"}
+        </button>
         <div>
           <h1 className="text-3xl font-semibold mb-6">Products</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

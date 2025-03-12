@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 const ProductBox = (props) => {
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    props.setQuantity();
   };
 
   return (
