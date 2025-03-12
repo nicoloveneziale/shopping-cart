@@ -7,6 +7,7 @@ import ProductsPage from "./routes/productsPage";
 import Products from "./routes/products";
 import ErrorPage from "./error-page";
 import About from "./routes/about";
+import Cart from "./routes/cart";
 import { CartProvider } from "./context/CartContext";
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
