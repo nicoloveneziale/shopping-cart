@@ -12,7 +12,14 @@ const ProductsPage = () => {
   const { cart, setCart } = useCart();
 
   function handleClick() {
-    setCart({ ...cart, [productId]: { id: productId, quantity: quantity } });
+    setCart({
+      ...cart,
+      [productId]: {
+        id: productId,
+        quantity: quantity,
+        img: product.img,
+      },
+    });
   }
 
   useEffect(() => {
