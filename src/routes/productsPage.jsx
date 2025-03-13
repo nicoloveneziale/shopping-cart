@@ -17,7 +17,9 @@ const ProductsPage = () => {
       [productId]: {
         id: productId,
         quantity: quantity,
-        img: product.img,
+        img: product.image,
+        title: product.title,
+        price: product.price,
       },
     });
   }
