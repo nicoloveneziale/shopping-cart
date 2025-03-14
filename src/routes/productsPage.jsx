@@ -12,16 +12,26 @@ const ProductsPage = () => {
   const { cart, setCart } = useCart();
 
   function handleClick() {
-    setCart({
-      ...cart,
-      [productId]: {
-        id: productId,
-        quantity: quantity,
-        img: product.image,
-        title: product.title,
-        price: product.price,
-      },
-    });
+    if (cart[productId]) {
+      setCart({
+        ...cart,
+        [productId]: {
+          ...cart[productId],
+          quantity: cart[productId].quantity + quantity,
+        },
+      });
+    } else {
+      setCart({
+        ...cart,
+        [productId]: {
+          id: productId,
+          quantity: quantity,
+          img: product.image,
+          title: product.title,
+          price: product.price,
+        },
+      });
+    }
   }
 
   useEffect(() => {

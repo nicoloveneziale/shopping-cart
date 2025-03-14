@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const ProductBox = (props) => {
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    props.setQuantity();
   };
 
   return (
@@ -22,6 +22,14 @@ const ProductBox = (props) => {
       </Link>
     </>
   );
+};
+
+ProductBox.propTypes = {
+  productId: PropTypes.int,
+  name: PropTypes.string,
+  description: PropTypes.string,
+  img: PropTypes.string,
+  price: PropTypes.float,
 };
 
 export default ProductBox;

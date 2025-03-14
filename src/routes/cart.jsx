@@ -37,6 +37,19 @@ const Cart = () => {
     });
   };
 
+  const calculateSubtotal = (item) => {
+    return item.price * item.quantity;
+  };
+
+  const calculateTotal = () => {
+    return Object.values(cart).reduce(
+      (total, item) => total + calculateSubtotal(item),
+      0,
+    );
+  };
+
+  const total = calculateTotal();
+
   return (
     <div className="min-h-screen bg-gray-100 py-16">
       <div className="container mx-auto max-w-4xl p-4 md:p-6">
@@ -88,6 +101,30 @@ const Cart = () => {
               </div>
             );
           })}
+        </div>
+        <div className="mt-8">
+          <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
+          <div className="border-t border-gray-300 pt-4">
+            {Object.keys(cart).map((id) => {
+              const item = cart[id];
+              const subtotal = calculateSubtotal(item);
+              return (
+                <div
+                  key={id}
+                  className="flex justify-between items-center mb-2"
+                >
+                  <span className="text-gray-700">
+                    {item.title} x {item.quantity}
+                  </span>
+                  <span className="font-semibold">£{subtotal.toFixed(2)}</span>
+                </div>
+              );
+            })}
+            <div className="flex justify-between items-center mt-4 border-t border-gray-300 pt-4">
+              <span className="text-lg font-semibold">Total</span>
+              <span className="text-lg font-semibold">£{total.toFixed(2)}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
